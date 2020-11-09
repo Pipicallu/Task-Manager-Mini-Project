@@ -1,14 +1,27 @@
 {% extends "base.html" %} {% block content %}
-<h3 class="center-align deep-orange-text text-darken-3">Register</h3>
+<h3 class="center-align deep-orange-text text-darken-3">Log In</h3>
 
 <div class="row">
-  <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register') }}">
+  <form
+    class="col s12 m8 offset-m2"
+    method="POST"
+    action="{{ url_for('login') }}"
+  >
     <div class="card-panel">
-    <!--username-->
+      <!--username-->
       <div class="row">
         <div class="input-field col s12">
-          <i class="fas fa-user-plus prefix deep-orange-text text-darken-3"></i>
-          <input id="username" name="username" type="text" class="validate" minlength="5" pattern="^[a-zA-Z0-9]{5,15}$" maxlength="15" required/>
+          <i class="fas fa-user-cog prefix deep-orange-text text-darken-3"></i>
+          <input
+            id="username"
+            name="username"
+            type="text"
+            class="validate"
+            minlength="5"
+            pattern="^[a-zA-Z0-9]{5,15}$"
+            maxlength="15"
+            required
+          />
           <label for="username">Username</label>
         </div>
       </div>
@@ -29,9 +42,11 @@
           <label for="password">Password</label>
         </div>
       </div>
-      <!--Register-->
+      <!--login-->
       <div class="row">
-      <button type="submit" class="col s12 btn-large deep-orange darken-3 ">Register <i class="fas fa-sign-in-alt"></i></button>
+        <button type="submit" class="col s12 btn-large deep-orange darken-3">
+          LogIn <i class="fas fa-sign-in-alt"></i>
+        </button>
       </div>
     </div>
   </form>
@@ -40,7 +55,7 @@
 <div class="row">
   <div class="col s12">
     <p class="center-align">
-    Already a user? <a href="{{ url_for('login') }}" class="deep-orange-text text-darken-3">Login</a>
+    New Here <a href="{{ url_for('register') }}" class="deep-orange-text text-darken-3">Register Account</a>
     </p>
   </div>
 </div>
