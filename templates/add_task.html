@@ -4,6 +4,18 @@
   <form class="col s12" method="POST" action="">
     <div class="row">
       <div class="input-field col s12">
+      <i class="fas fa-folder-open prefix deep-orange-text text-darken-3"></i>
+        <select id="category_name" name="category_name" class="validate" required>
+          <option value="" disabled selected>Choose Category</option>
+          {% for category in categories %}
+            <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+          {% endfor %}
+        </select>
+        <label for="category_name">Task Category</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
         <i class="fas fa-pencil-alt prefix deep-orange-text text-darken-3"></i>
         <input
           id="task_name"
@@ -31,34 +43,40 @@
       </div>
     </div>
     <div class="row">
-  <form class="col s12" method="POST" action="">
-    <div class="row">
-      <div class="input-field col s12">
-        <i class="fas fa-calendar-alt prefix deep-orange-text text-darken-3"></i>
-        <input
-          id="due_date"
-          name="due_date"
-          type="text"
-          minlength="5"
-          maxlength="50"
-          class="datepicker validate"
-          required
-        />
-        <label for="due_date">Due Date</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <div class="switch">
-        <i class="fas fa-exclamation-circle prefix deep-orange-text text-darken-3"></i>
-          <label for="is_urgent">
-            <input type="checkbox" name="is_urgent" id="is_urgent" />
-            <span class="lever"></span>
-            Is urgent
-          </label>
+      <form class="col s12" method="POST" action="">
+        <div class="row">
+          <div class="input-field col s12">
+            <i
+              class="fas fa-calendar-alt prefix deep-orange-text text-darken-3"
+            ></i>
+            <input
+              id="due_date"
+              name="due_date"
+              type="text"
+              minlength="5"
+              maxlength="50"
+              class="datepicker validate"
+              required
+            />
+            <label for="due_date">Due Date</label>
+          </div>
         </div>
-      </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <div class="switch">
+              <i
+                class="fas fa-exclamation-circle prefix deep-orange-text text-darken-3"
+              ></i>
+              <label for="is_urgent">
+                <input type="checkbox" name="is_urgent" id="is_urgent" />
+                <span class="lever"></span>
+                Is urgent
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
+    {% endblock %}
   </form>
 </div>
-{% endblock %}
