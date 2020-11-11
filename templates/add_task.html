@@ -1,19 +1,28 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %} 
+{% block content %}
 <h3 class="deep-orange-text text-darken-3 center-align">Add Task</h3>
 <div class="row card-panel grey lighten-5">
-  <form class="col s12" method="POST" action="">
+  <form class="col s12" method="POST" action="{{ url_for('add_task') }}">
+  <!-- category selection -->
     <div class="row">
       <div class="input-field col s12">
-      <i class="fas fa-folder-open prefix deep-orange-text text-darken-3"></i>
-        <select id="category_name" name="category_name" class="validate" required>
+        <i class="fas fa-folder-open prefix deep-orange-text text-darken-3"></i>
+        <select
+          id="category_name"
+          name="category_name"
+          class="validate"
+          required
+        >
           <option value="" disabled selected>Choose Category</option>
           {% for category in categories %}
-            <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+          <option value="{{ category.category_name }}">{{ category.category_name }}
+          </option>
           {% endfor %}
         </select>
         <label for="category_name">Task Category</label>
       </div>
     </div>
+    <!-- Task name -->
     <div class="row">
       <div class="input-field col s12">
         <i class="fas fa-pencil-alt prefix deep-orange-text text-darken-3"></i>
@@ -29,6 +38,7 @@
         <label for="task_name">Task Name</label>
       </div>
     </div>
+    <!-- task Description -->
     <div class="row">
       <div class="input-field col s12">
         <i class="fas fa-align-left prefix deep-orange-text text-darken-3"></i>
@@ -37,13 +47,14 @@
           name="task_description"
           minlength="5"
           maxlength="200"
-          class="materialize-textarea"
+          class="materialize-textarea validate"
         ></textarea>
-        <label for="tast_description">Task Description</label>
+        <label for="task_description">Task Description</label>
       </div>
     </div>
+    <!-- due date picker -->
     <div class="row">
-      <form class="col s12" method="POST" action="">
+      <div class="col s12">
         <div class="row">
           <div class="input-field col s12">
             <i
@@ -53,14 +64,13 @@
               id="due_date"
               name="due_date"
               type="text"
-              minlength="5"
-              maxlength="50"
               class="datepicker validate"
               required
             />
             <label for="due_date">Due Date</label>
           </div>
         </div>
+        <!-- is urgent toggle -->
         <div class="row">
           <div class="input-field col s12">
             <div class="switch">
@@ -75,8 +85,16 @@
             </div>
           </div>
         </div>
-      </form>
+      </div>
     </div>
-    {% endblock %}
+    <!-- submit button -->
+    <div class="row">
+      <div class="col s12 center-align">
+      <button type="submit" class="btn-large deep-orange darken-3">
+      Add Task <i class="fas fa-plus-square right"></i>
+      </button> 
+      </div>
+    </div>
   </form>
 </div>
+{% endblock %}

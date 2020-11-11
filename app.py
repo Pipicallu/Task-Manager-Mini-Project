@@ -17,6 +17,8 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 @app.route("/")
+
+
 @app.route("/get_tasks")
 def get_tasks():
     tasks = list(mongo.db.tasks.find())
@@ -91,10 +93,25 @@ def logout():
     session.pop("user")
     return redirect(url_for("login"))
 
-@app.route("/add_task")
+
+@app.route("/add_task", methods=["GET", "POST"])
 def add_task():
+    if request.method == "POST":
+        is_urgent = "on" if request.form.get("is_urgent") else "off"
+        task = {
+            "category_name": request.form.get("category_name"),
+            "task_name": request.form.get("task_name"),
+            "task_description": request.form.get("task_description"),
+            "due_date": request.form.get("due_date"),
+            "is_urgent": is_urgent,
+            "created_by": session["user"]
+        }
+        mongo.db.tasks.insert_one(task)
+        flash("Task Successfully added")
+        return redirect(url_for("get_tasks"))
     categories = mongo.db.categories.find().sort("category_name", 1)
     return render_template("add_task.html", categories=categories)
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),

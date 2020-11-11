@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
     
+    <h3 class="deep-orange-text text-darken-3 center-align">All Tasks</h3>
+
     <ul class="collapsible">
     {% for task in tasks %}
     <li>
@@ -13,6 +15,7 @@
       <div class="collapsible-body">
       <strong>{{ task.category_name }}</strong>
       <p>{{ task.task_description }}</p>
+      <p><em>by: {{ task.created_by }}</em></p>
       </div>
     </li>
     {% endfor %}
