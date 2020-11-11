@@ -15,8 +15,13 @@
         >
           <option value="" disabled selected>Choose Category</option>
           {% for category in categories %}
-          <option value="{{ category.category_name }}">{{ category.category_name }}
-          </option>
+            {% if category.category_name == task.category_name %}
+                <option value="{{ category.category_name }}" selected>{{ category.category_name }}
+                </option>
+            {% else %}
+                <option value="{{ category.category_name }}">{{ category.category_name }}
+                </option>
+            {% endif %}
           {% endfor %}
         </select>
         <label for="category_name">Task Category</label>
@@ -33,6 +38,7 @@
           minlength="5"
           maxlength="50"
           class="validate"
+          value="{{task.task_name}}"
           required
         />
         <label for="task_name">Task Name</label>
@@ -48,7 +54,7 @@
           minlength="5"
           maxlength="200"
           class="materialize-textarea validate"
-        ></textarea>
+        >{{ task.task_description }}</textarea>
         <label for="task_description">Task Description</label>
       </div>
     </div>
@@ -64,6 +70,7 @@
               id="due_date"
               name="due_date"
               type="text"
+              value="{{task.due_date}}"
               class="datepicker validate"
               required
             />
@@ -78,7 +85,11 @@
                 class="fas fa-exclamation-circle prefix deep-orange-text text-darken-3"
               ></i>
               <label for="is_urgent">
-                <input type="checkbox" name="is_urgent" id="is_urgent" />
+                {% if task.is_urgent == "on" %}
+                  <input type="checkbox" name="is_urgent" id="is_urgent" checked />
+                {% else %}
+                  <input type="checkbox" name="is_urgent" id="is_urgent" />
+                {% endif %}
                 <span class="lever"></span>
                 Is urgent
               </label>
@@ -90,6 +101,8 @@
     <!-- submit button -->
     <div class="row">
       <div class="col s12 center-align">
+      <!-- cancel button -->
+      <a href="{{ url_for('get_tasks') }}" class="btn-large red">Cancel <i class="fas fa-times-circle right"></i></a>
       <button type="submit" class="btn-large deep-orange darken-3">
       edit Task <i class="fas fa-edit right"></i>
       </button> 
